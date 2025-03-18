@@ -4,23 +4,37 @@ public class Calc {
 
     public static int run(String exp) {
 
-        System.out.println("exp1 : " + exp);
 
-        exp = exp.replace("- ", "+ -");
+        if(exp.contains("*")) {
+            String[] bits = exp.split(" \\* ");
 
-        System.out.println("exp2 : " + exp);
+            System.out.println(bits.length);
+            System.out.println(bits[0] + "*" + bits[1] + "*" + bits[2]);
 
-        String[] bits = exp.split(" \\+ ");
+            int a = Integer.parseInt(bits[0]);
+              
+            int b = Integer.parseInt(bits[1]);
+            int c = Integer.parseInt(bits[2]);
+                System.out.println(a + "*" + b + "*" + c);
+            return a * b * c;
+    }
+        else{
+            exp = exp.replace("- ", "+ -");
+            String[] bits = exp.split(" \\+ ");
 
-        int sum = 0;
+            int a = Integer.parseInt(bits[0]);
+            System.out.println(bits[0]);
+            int b = Integer.parseInt(bits[1]);
+            int c = 0;
 
-        for (int i = 0; i < bits.length; i++) {
-            sum += Integer.parseInt(bits[i]);
+            if (bits.length > 2) {
+                c = Integer.parseInt(bits[2]);
+            }
+
+            return a + b + c;
+
         }
 
-        return sum;
-
-        // throw new RuntimeException("해석 불가 : 올바른 계산식이 아닙니다");
     }
 
 }
