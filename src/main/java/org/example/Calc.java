@@ -9,13 +9,12 @@ public class Calc {
         boolean needToMulti = exp.contains("*");
         boolean needToPlus = exp.contains("+");
         boolean needTole = exp.contains("(");
-        boolean needTori = exp.contains(")");
 
         boolean needToCompound = needToPlus && needToMulti;
 
         if (needToCompound&&needTole) {
             int a;
-            int sum = 0;
+            int b = 0;
 
             exp = exp.replace("(", "");
             exp = exp.replace(")", "");
@@ -26,18 +25,18 @@ public class Calc {
                     String[] arr = bits[i].split(" \\+ ");
                     for (int j = 0; j < arr.length; j++) {
 
-                        sum += Integer.parseInt(arr[j]);
+                        b += Integer.parseInt(arr[j]);
 
                     }
 
                 } else {
                     a = run(bits[i]);
                     System.out.println("a=" + a);
-                    sum *= a;
+                    b *= a;
                 }
-                System.out.println("sum=" + sum);
+                System.out.println("sum=" + b);
             }
-            return sum;
+            return b;
         }
         else if (needToCompound) {
             int a;
@@ -70,7 +69,7 @@ public class Calc {
             return sum;
         } else {
             exp = exp.replace("- ", "+ -");
-            if (needTole && needTori) {
+            if (needTole) {
                 exp = exp.replace("(", "");
                 exp = exp.replace(")", "");
 
