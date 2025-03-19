@@ -40,9 +40,7 @@ public class Calc {
             for (int i = 0; i < bits.length; i++) {
                 sum *= Integer.parseInt(bits[i]);
             }
-
             return sum;
-
             }
         else  {
             exp = exp.replace("- ", "+ -");
