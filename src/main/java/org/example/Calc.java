@@ -17,7 +17,7 @@ public class Calc {
         if (!exp.contains(" ")) {
             return Integer.parseInt(exp);
         }
-
+       
         if (needToCompound&&needTole) {
             int a;
             int b = 0;
@@ -61,6 +61,21 @@ public class Calc {
                 System.out.println("sum=" + sum);
             }
             return sum;
+        }
+        else if (exp.contains("-")&&needTole) {
+            int a=0;
+            int b=0;
+            stripOuterBrackets(exp);
+            String[] bits = exp.split("-");
+            for (int i = 1; i < bits.length; i++) {
+                String[] arr = bits[i].split(" \\+ ");
+                for (int j = 0; j < arr.length; j++) {
+
+                    b += Integer.parseInt(arr[j]);
+
+                }
+                return -b;
+            }
         }
         if (needToMulti) {
 

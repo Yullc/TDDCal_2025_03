@@ -121,4 +121,25 @@ public class CalcTest {
     public void test19() {
         assertThat(Calc.run("(10 + 20) * 3")).isEqualTo(90);
     }
+
+    @Test
+    @DisplayName("10 + (10 + 5) == 25")
+    public void test20() {
+        assertThat(Calc.run("10 + (10 + 5)")).isEqualTo(25);
+    }
+
+    @Test
+    @DisplayName("-(10 + 5) == -15")
+    public void test21() {
+        assertThat(Calc.run("-(10 + 5)")).isEqualTo(-15);
+    }
+
+    @Test
+    @DisplayName("3 * 1 + (1 - (4 * 1 - (1 - 1)))")
+    public void test22() {
+        assertThat(Calc.run("3 * 1 + (1 - (4 * 1 - (1 - 1)))")).isEqualTo(0);
+    }
+
+
+
 }
