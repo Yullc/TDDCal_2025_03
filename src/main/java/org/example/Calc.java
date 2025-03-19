@@ -1,40 +1,58 @@
 package org.example;
 
+import java.util.Arrays;
+
 public class Calc {
 
     public static int run(String exp) {
 
+        boolean needToMulti = exp.contains("*");
+        boolean needToPlus = exp.contains("+");
 
-        if(exp.contains("*")) {
+        boolean needToCompound = needToPlus && needToMulti;
+
+        if (needToCompound) {
+            int a;
+            int b ;
+            int sum = 0;
+            String[] bits = exp.split(" \\+ ");
+            for(int i = 0; i< bits.length; i++){
+                if(bits[i].contains("*")) {
+                    a= run(bits[i]);
+                    System.out.println("a="+a);
+                    sum += a;
+                }
+                else {
+                 b=Integer.parseInt(bits[i]);
+                    System.out.println("b="+b);
+                    sum += b;
+                }
+                System.out.println("sum="+sum);
+            }
+            return sum;
+        }
+        if (needToMulti) {
+
             String[] bits = exp.split(" \\* ");
 
-            System.out.println(bits.length);
-            System.out.println(bits[0] + "*" + bits[1] + "*" + bits[2]);
+            int sum = 1;
 
-            int a = Integer.parseInt(bits[0]);
-              
-            int b = Integer.parseInt(bits[1]);
-            int c = Integer.parseInt(bits[2]);
-                System.out.println(a + "*" + b + "*" + c);
-            return a * b * c;
-    }
-        else{
-            exp = exp.replace("- ", "+ -");
-            String[] bits = exp.split(" \\+ ");
-
-            int a = Integer.parseInt(bits[0]);
-            System.out.println(bits[0]);
-            int b = Integer.parseInt(bits[1]);
-            int c = 0;
-
-            if (bits.length > 2) {
-                c = Integer.parseInt(bits[2]);
+            for (int i = 0; i < bits.length; i++) {
+                sum *= Integer.parseInt(bits[i]);
             }
 
-            return a + b + c;
+            return sum;
 
+            }
+        else  {
+            exp = exp.replace("- ", "+ -");
         }
-
+        String[] bits = exp.split(" \\+ ");
+        int sum = 0;
+        for (int i = 0; i < bits.length; i++) {
+            sum += Integer.parseInt(bits[i]);
+        }
+        return sum;
     }
 
 }
