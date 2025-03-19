@@ -8,26 +8,27 @@ public class Calc {
 
         boolean needToMulti = exp.contains("*");
         boolean needToPlus = exp.contains("+");
+        boolean needTole = exp.contains("(");
+        boolean needTori = exp.contains(")");
 
         boolean needToCompound = needToPlus && needToMulti;
 
         if (needToCompound) {
             int a;
-            int b ;
+            int b;
             int sum = 0;
             String[] bits = exp.split(" \\+ ");
-            for(int i = 0; i< bits.length; i++){
-                if(bits[i].contains("*")) {
-                    a= run(bits[i]);
-                    System.out.println("a="+a);
+            for (int i = 0; i < bits.length; i++) {
+                if (bits[i].contains("*")) {
+                    a = run(bits[i]);
+                    System.out.println("a=" + a);
                     sum += a;
-                }
-                else {
-                 b=Integer.parseInt(bits[i]);
-                    System.out.println("b="+b);
+                } else {
+                    b = Integer.parseInt(bits[i]);
+                    System.out.println("b=" + b);
                     sum += b;
                 }
-                System.out.println("sum="+sum);
+                System.out.println("sum=" + sum);
             }
             return sum;
         }
@@ -41,16 +42,31 @@ public class Calc {
                 sum *= Integer.parseInt(bits[i]);
             }
             return sum;
-            }
-        else  {
+        } else {
             exp = exp.replace("- ", "+ -");
-        }
-        String[] bits = exp.split(" \\+ ");
-        int sum = 0;
-        for (int i = 0; i < bits.length; i++) {
-            sum += Integer.parseInt(bits[i]);
-        }
-        return sum;
-    }
+            if (needTole && needTori) {
+                exp = exp.replace("(", "");
+                exp = exp.replace(")", "");
+                exp = exp.trim();
 
+                String[] bits = exp.split(" \\+ ");
+                int sum = 0;
+                for (int i = 0; i < bits.length; i++) {
+                    sum += Integer.parseInt(bits[i]);
+                    System.out.println("sum=" + sum);
+                }
+                return sum;
+            }
+            else {
+            String[] bits = exp.split(" \\+ ");
+            int sum = 0;
+            for (int i = 0; i < bits.length; i++) {
+                sum += Integer.parseInt(bits[i]);
+            }
+            return sum;
+            }
+
+        }
+
+    }
 }
