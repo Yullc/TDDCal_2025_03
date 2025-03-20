@@ -135,9 +135,9 @@ public class CalcTest {
     }
 
     @Test
-    @DisplayName("3 * 1 + (1 - (4 * 1 - (1 - 1)))")
+    @DisplayName("-(8 + 2) * -(7 + 3) + 5 == 105")
     public void test22() {
-        assertThat(Calc.run("3 * 1 + (1 - (4 * 1 - (1 - 1)))")).isEqualTo(0);
+        assertThat(Calc.run("-(8 + 2) * -(7 + 3) + 5")).isEqualTo(105);
     }
 
 

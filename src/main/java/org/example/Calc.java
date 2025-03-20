@@ -9,15 +9,38 @@ public class Calc {
         boolean needToMulti = exp.contains("*");
         boolean needToPlus = exp.contains("+");
         boolean needTole = exp.contains("(");
-
+        boolean needToMinus = exp.contains("-");
         boolean needToCompound = needToPlus && needToMulti;
 
+        if(needToPlus&&needTole&&needToCompound) {
+            if(needToMinus) {
+                int a=0;
+                int b=0;
+                int sum=0;
+                exp = exp.replace("-","");
+                exp = exp.replace("(","");
+                exp = exp.replace(")","");
+                String[] bits = exp.split(" \\* ");
+                for(int i = 0; i < bits.length; i++) {
+                    String[] arr = bits[i].split(" \\+ ");
+                    for(int j = 0; j < arr.length; j++) {
+                       a+= Integer.parseInt(arr[j]);
+                     if(arr.length > 1) {
+                         b+= Integer.parseInt(arr[j]);
+                     }
+                    }
+                }
+                return sum;
+            }
+
+
+        }
         exp =stripOuterBrackets(exp);
         // 단일항이 들어오면 바로 리턴
         if (!exp.contains(" ")) {
             return Integer.parseInt(exp);
         }
-       
+
         if (needToCompound&&needTole) {
             int a;
             int b = 0;
@@ -62,7 +85,7 @@ public class Calc {
             }
             return sum;
         }
-        else if (exp.contains("-")&&needTole) {
+        else if (needToMinus&&needTole) {
             int a=0;
             int b=0;
             stripOuterBrackets(exp);
