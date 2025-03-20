@@ -140,6 +140,12 @@ public class CalcTest {
         assertThat(Calc.run("-(8 + 2) * -(7 + 3) + 5")).isEqualTo(105);
     }
 
+    @Test
+    @DisplayName("3 * 1 + (1 - (4 * 1 - (1 - 1))) == 0")
+    public void test23() {
+        assertThat(Calc.run("3 * 1 + (1 - (4 * 1 - (1 - 1)))")).isEqualTo(0);
+    }
+
 
 
 }
